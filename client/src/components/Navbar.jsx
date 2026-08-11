@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { FiSearch, FiHeart, FiUser, FiShoppingCart, FiGlobe, FiChevronDown } from 'react-icons/fi'
+import logo from '../assets/logo.svg'
 
 const Navbar = ({ category, setCategory }) => {
   const [activePopup, setActivePopup] = useState(null)
@@ -35,13 +36,7 @@ const Navbar = ({ category, setCategory }) => {
         
         <div className="flex-1 flex justify-center">
           <Link to="/" className="flex flex-col items-center group">
-            <div className="text-3xl font-extrabold text-black tracking-widest flex items-center group-hover:scale-105 transition-transform">
-              <div className="relative w-[18px] h-[18px] border-[3px] border-black rounded-full flex justify-center items-center mr-1">
-                <div className="w-[3px] h-[3px] bg-black rounded-full"></div>
-              </div>
-              RREN
-            </div>
-            <span className="text-[8px] text-gray-500 tracking-[0.4em] font-bold mt-1">FASHION & LIFESTYLE</span>
+            <img src={logo} alt="Orren Logo" className="h-[40px] object-contain group-hover:scale-105 transition-transform" />
           </Link>
         </div>
         
