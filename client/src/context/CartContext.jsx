@@ -7,6 +7,7 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
   const [toast, setToast] = useState(null);
 
   // Auto-hide toast after 3 seconds
@@ -21,19 +22,17 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCartItems(prev => {
-      // Check if already in cart
       const existing = prev.find(item => item.id === product.id);
       if (existing) {
         return prev.map(item => 
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prev, { ...product, quantity: 1, price: 179.98 }]; // Hardcoded price for now based on design
+      return [...prev, { ...product, quantity: 1, price: 179.98 }];
     });
     
-    // Show toast
     setToast({
-      message: 'Your item added to cart successfully!',
+      message: 'Added to cart successfully!',
       productName: product.title || 'Classic Slim-Fit Denim Jacket'
     });
   };
@@ -42,8 +41,31 @@ export const CartProvider = ({ children }) => {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
+  const toggleWishlist = (product) => {
+    setWishlistItems(prev => {
+      const existing = prev.find(item => item.id === product.id);
+      if (existing) {
+        setToast({
+          message: 'Removed from wishlist!',
+          productName: product.title || 'Classic Slim-Fit Denim Jacket'
+        });
+        return prev.filter(item => item.id !== product.id);
+      } else {
+        setToast({
+          message: 'Added to wishlist!',
+          productName: product.title || 'Classic Slim-Fit Denim Jacket'
+        });
+        return [...prev, { ...product, price: 179.98 }];
+      }
+    });
+  };
+
+  const removeFromWishlist = (id) => {
+    setWishlistItems(prev => prev.filter(item => item.id !== id));
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, wishlistItems, toggleWishlist, removeFromWishlist }}>
       {children}
       
       {/* Global Toast Popup */}

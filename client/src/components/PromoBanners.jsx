@@ -1,13 +1,33 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import cardimg1 from '../assets/cardimg1.png'
 import cardimg2 from '../assets/cardimg2.png'
 import cardimg3 from '../assets/cardimg3.png'
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+}
+
 const PromoBanners = () => {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+    >
       {/* Card 1 */}
-      <div className="relative h-[220px] bg-[#f4efe9] overflow-hidden group flex items-center justify-end px-8 cursor-pointer">
+      <motion.div variants={itemVariants} className="relative h-[220px] bg-[#f4efe9] overflow-hidden group flex items-center justify-end px-8 cursor-pointer">
         <img
           src={cardimg1}
           alt="Hat Sales"
@@ -22,10 +42,10 @@ const PromoBanners = () => {
             BUY NOW!
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Card 2 */}
-      <div className="relative h-[220px] bg-[#1a1a1a] overflow-hidden group flex items-center justify-end px-8 cursor-pointer">
+      <motion.div variants={itemVariants} className="relative h-[220px] bg-[#1a1a1a] overflow-hidden group flex items-center justify-end px-8 cursor-pointer">
         <img
           src={cardimg2}
           alt="Sunglasses"
@@ -41,10 +61,10 @@ const PromoBanners = () => {
             VIEW SALE
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Card 3 */}
-      <div className="relative h-[220px] bg-white overflow-hidden group flex items-center justify-start px-8 cursor-pointer border-r border-gray-100">
+      <motion.div variants={itemVariants} className="relative h-[220px] bg-white overflow-hidden group flex items-center justify-start px-8 cursor-pointer border-r border-gray-100">
         <div className="relative z-10 flex flex-col items-start text-left">
           <span className="text-gray-400 text-[8px] font-bold tracking-[0.3em] uppercase mb-2">GOLDENGAIT</span>
           <h3 className="font-['Dancing_Script',cursive] text-[26px] text-gray-700 mb-0">Exclusive Shoes</h3>
@@ -61,10 +81,10 @@ const PromoBanners = () => {
           alt="Shoes"
           className="absolute right-0 bottom-0 h-[90%] w-auto object-contain transition-transform duration-700 group-hover:scale-105"
         />
-      </div>
+      </motion.div>
 
       {/* Card 4 */}
-      <div className="relative h-[220px] bg-white overflow-hidden group flex flex-col items-center justify-center px-8 cursor-pointer">
+      <motion.div variants={itemVariants} className="relative h-[220px] bg-white overflow-hidden group flex flex-col items-center justify-center px-8 cursor-pointer">
         {/* Floating discount circles */}
         <div className="absolute top-6 right-16 w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center text-[7px] font-bold text-pink-400 z-0">50%</div>
         <div className="absolute top-12 right-2 w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center text-[10px] font-bold text-white z-0 shadow-sm">70%</div>
@@ -79,8 +99,8 @@ const PromoBanners = () => {
             SHOP NOW
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

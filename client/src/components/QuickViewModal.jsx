@@ -3,11 +3,13 @@ import { FiX, FiStar, FiShoppingBag, FiHeart, FiCheck } from 'react-icons/fi'
 import { useCart } from '../context/CartContext'
 
 const QuickViewModal = ({ product, onClose }) => {
-  const { addToCart } = useCart();
+  const { addToCart, toggleWishlist, wishlistItems } = useCart();
   const [selectedSize, setSelectedSize] = useState('M')
   const [selectedColor, setSelectedColor] = useState('blue')
 
   if (!product) return null;
+
+  const isWishlisted = wishlistItems.some(item => item.id === product.id);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-sm transition-opacity">
@@ -117,8 +119,11 @@ const QuickViewModal = ({ product, onClose }) => {
               <FiShoppingBag size={18} />
               ADD TO CART
             </button>
-            <button className="w-14 h-14 bg-gray-100 text-gray-600 rounded-xl flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors">
-              <FiHeart size={20} />
+            <button 
+              onClick={() => toggleWishlist(product)}
+              className="w-14 h-14 bg-gray-100 text-gray-600 rounded-xl flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors"
+            >
+              <FiHeart size={20} className={isWishlisted ? 'fill-red-500 text-red-500' : ''} />
             </button>
           </div>
 

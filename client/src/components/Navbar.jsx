@@ -5,7 +5,7 @@ import logo from '../assets/logo.svg'
 import { useCart } from '../context/CartContext'
 
 const Navbar = ({ category, setCategory }) => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, wishlistItems } = useCart();
   const [activePopup, setActivePopup] = useState(null)
   const navRef = useRef(null)
   
@@ -58,10 +58,17 @@ const Navbar = ({ category, setCategory }) => {
             </div>
             
             <div className="relative">
-              <FiHeart className="cursor-pointer hover:text-black transition-colors" onClick={() => togglePopup('wishlist')} />
+              <div className="relative cursor-pointer hover:text-black transition-colors" onClick={() => togglePopup('wishlist')}>
+                <FiHeart />
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[#cc1f2f] text-white text-[10px] w-[18px] h-[18px] rounded-full flex items-center justify-center font-bold">
+                    {wishlistItems.length}
+                  </span>
+                )}
+              </div>
               {activePopup === 'wishlist' && (
                 <div className="absolute top-8 right-0 w-64 bg-white border border-gray-200 shadow-xl p-4 z-50 rounded text-sm text-center text-black" onClick={e => e.stopPropagation()}>
-                  Your wishlist is empty.
+                  {wishlistItems.length === 0 ? 'Your wishlist is empty.' : `You have ${wishlistItems.length} items in your wishlist.`}
                 </div>
               )}
             </div>

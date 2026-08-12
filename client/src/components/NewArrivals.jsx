@@ -1,8 +1,22 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { FiArrowUpRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import new1 from '../assets/new1.png'
 import new2 from '../assets/new2.png'
 import new3 from '../assets/new3.png'
+
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+}
+
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+}
 
 const NewArrivals = () => {
   const cards = [
@@ -32,7 +46,13 @@ const NewArrivals = () => {
   return (
     <section className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
       {/* Header Section */}
-      <div className="flex flex-col items-center text-center mb-16">
+      <motion.div 
+        variants={fadeUpVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="flex flex-col items-center text-center mb-16"
+      >
         <h2 className="text-4xl text-[#1a202c] mb-4">
           <span className="font-black">NEW</span> ARRIVALS
         </h2>
@@ -40,7 +60,7 @@ const NewArrivals = () => {
           Discover fresh looks and modern outfits that define your unique style now. Perfect for
           any occasion, from casual outings to special events.
         </p>
-      </div>
+      </motion.div>
 
       {/* Cards Section */}
       <div className="relative flex items-center justify-center">
@@ -49,9 +69,16 @@ const NewArrivals = () => {
           <FiChevronLeft size={20} />
         </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-4">
+        <motion.div 
+          variants={containerVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-4"
+        >
           {cards.map((card) => (
-            <div
+            <motion.div
+              variants={fadeUpVariant}
               key={card.id}
               className={`relative group rounded-[32px] overflow-hidden h-[500px] ${card.bgClass}`}
             >
@@ -100,9 +127,9 @@ const NewArrivals = () => {
                   SHOP NOW
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Right Arrow */}
         <button className="absolute right-[-20px] lg:right-[-40px] w-12 h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-black hover:border-gray-400 transition-colors z-10 hidden md:flex shadow-sm">

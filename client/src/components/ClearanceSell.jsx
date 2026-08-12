@@ -1,15 +1,29 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import { FiHeart, FiEye, FiStar, FiShoppingBag } from 'react-icons/fi'
 import card1img from '../assets/card1.png'
 import card2img from '../assets/card2.png'
 import card3img from '../assets/card3.png'
 import card4img from '../assets/card4.png'
+
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+}
+
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+}
 import QuickViewModal from './QuickViewModal'
 import { useCart } from '../context/CartContext'
 import { useEffect } from 'react'
 
 const ClearanceSell = () => {
-  const { addToCart } = useCart();
+  const { addToCart, toggleWishlist, wishlistItems } = useCart();
   const [selectedProduct, setSelectedProduct] = useState(null);
   
   // Dynamic Timer
@@ -65,7 +79,13 @@ const ClearanceSell = () => {
   return (
     <section className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+      <motion.div 
+        variants={fadeUpVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8"
+      >
         <div className="max-w-2xl">
           <h2 className="text-[32px] text-[#1a202c] mb-4">
             <span className="font-black">LAST CHANCE</span> CLEARANCE SELL
@@ -89,12 +109,18 @@ const ClearanceSell = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <motion.div 
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      >
         {cards.map((card) => (
-          <div key={card.id} className="group relative flex flex-col bg-white">
+          <motion.div variants={fadeUpVariant} key={card.id} className="group relative flex flex-col bg-white">
 
             {/* Image Box */}
             <div className={`relative h-[380px] group-hover:h-[320px] transition-all duration-400 ease-out rounded-[32px] overflow-hidden ${card.bgClass} cursor-pointer`}>
@@ -104,10 +130,16 @@ const ClearanceSell = () => {
                 className="absolute bottom-0 left-0 w-full h-[95%] object-contain object-bottom transition-transform duration-700 group-hover:scale-105 z-0"
               />
 
-              {/* Heart Icon */}
-              <button className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm transition-colors z-10">
-                <FiHeart size={14} />
-              </button>
+            {/* Heart Icon */}
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleWishlist(card);
+              }}
+              className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm transition-colors z-10"
+            >
+              <FiHeart size={14} className={wishlistItems.some(item => item.id === card.id) ? 'fill-red-500 text-red-500' : ''} />
+            </button>
 
               {/* Eye Icon Hover Cutout Container */}
               <div className="absolute bottom-0 right-0 z-20 
@@ -187,9 +219,9 @@ const ClearanceSell = () => {
               </div>
 
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* View More Button */}
       <div className="flex justify-center mt-12">
