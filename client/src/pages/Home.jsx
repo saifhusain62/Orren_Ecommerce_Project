@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import PromoBanners from '../components/PromoBanners'
 import NewArrivals from '../components/NewArrivals'
 import MarqueeBanner from '../components/MarqueeBanner'
+import Categories from '../components/Categories'
 
 const Home = ({ category }) => {
   return (
@@ -11,6 +12,7 @@ const Home = ({ category }) => {
       <PromoBanners />
       <NewArrivals />
       <MarqueeBanner />
+      <Categories />
     </main>
   )
 }

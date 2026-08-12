@@ -13,7 +13,7 @@ const MarqueeBanner = () => {
   ];
 
   return (
-    <div className="w-full bg-[#edf6fc] py-6 overflow-hidden flex items-center border-y border-blue-50 mt-10 mb-10">
+    <div className="w-full bg-[#edf6fc] py-8 overflow-hidden flex items-center border-y border-blue-50 mt-10 mb-10">
       <div className="flex whitespace-nowrap animate-marquee w-max">
         {/* We duplicate the content twice to ensure a seamless infinite scroll */}
         <div className="flex shrink-0 items-center justify-around w-[100vw] min-w-max">
