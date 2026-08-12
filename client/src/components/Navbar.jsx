@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { FiSearch, FiHeart, FiUser, FiShoppingCart, FiGlobe, FiChevronDown } from 'react-icons/fi'
+import { FiSearch, FiHeart, FiUser, FiShoppingCart, FiGlobe, FiChevronDown, FiTrash2 } from 'react-icons/fi'
 import logo from '../assets/logo.svg'
+import { useCart } from '../context/CartContext'
 
 const Navbar = ({ category, setCategory }) => {
+  const { cartItems, removeFromCart } = useCart();
   const [activePopup, setActivePopup] = useState(null)
   const navRef = useRef(null)
   
@@ -76,27 +78,50 @@ const Navbar = ({ category, setCategory }) => {
             
             <div className="relative cursor-pointer hover:text-black transition-colors" onClick={() => togglePopup('cart')}>
               <FiShoppingCart />
-              <span className="absolute -top-2 -right-2 bg-[#cc1f2f] text-white text-[10px] w-[18px] h-[18px] rounded-full flex items-center justify-center font-bold">3</span>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-[#cc1f2f] text-white text-[10px] w-[18px] h-[18px] rounded-full flex items-center justify-center font-bold">
+                  {cartItems.length}
+                </span>
+              )}
               {activePopup === 'cart' && (
-                <div className="absolute top-8 right-0 w-72 bg-white border border-gray-200 shadow-xl p-4 z-50 rounded flex flex-col gap-3 text-sm text-black cursor-default" onClick={e => e.stopPropagation()}>
-                  <h3 className="font-bold border-b pb-2">Shopping Cart (3)</h3>
-                  <div className="flex justify-between">
-                    <span>Stylish Dress</span>
-                    <span className="font-bold">$199</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Leather Bag</span>
-                    <span className="font-bold">$89</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Sun Glasses</span>
-                    <span className="font-bold">$49</span>
-                  </div>
-                  <div className="flex justify-between font-bold text-[#cc1f2f] pt-2">
-                    <span>Total</span>
-                    <span>$337</span>
-                  </div>
-                  <button className="cursor-pointer mt-2 bg-black text-white py-2 rounded font-bold tracking-widest hover:bg-[#cc1f2f] transition-colors">CHECKOUT</button>
+                <div className="absolute top-8 right-0 w-80 bg-white border border-gray-200 shadow-xl p-4 z-50 rounded flex flex-col gap-3 text-sm text-black cursor-default" onClick={e => e.stopPropagation()}>
+                  <h3 className="font-bold border-b pb-2">Shopping Cart ({cartItems.length})</h3>
+                  
+                  {cartItems.length === 0 ? (
+                    <div className="text-center py-4 text-gray-500">Your cart is empty.</div>
+                  ) : (
+                    <>
+                      <div className="flex flex-col gap-3 max-h-60 overflow-y-auto pr-2">
+                        {cartItems.map((item, idx) => (
+                          <div key={idx} className="flex justify-between items-center group">
+                            <div className="flex items-center gap-3">
+                              <img src={item.image} alt={item.title || 'Product'} className="w-10 h-10 object-cover rounded" />
+                              <div className="flex flex-col">
+                                <span className="text-xs font-bold line-clamp-1">{item.title || 'Classic Slim-Fit Denim Jacket'}</span>
+                                <span className="text-gray-500 text-[10px]">{item.quantity} × ${item.price}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className="font-bold text-sm">${(item.price * item.quantity).toFixed(2)}</span>
+                              <FiTrash2 
+                                className="text-gray-300 hover:text-red-500 cursor-pointer transition-colors" 
+                                onClick={() => removeFromCart(item.id)}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-between font-bold text-[#cc1f2f] border-t pt-2 mt-1">
+                        <span>Total</span>
+                        <span>
+                          ${cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}
+                        </span>
+                      </div>
+                      <button className="cursor-pointer mt-2 w-full bg-black text-white py-3 rounded-lg font-bold tracking-widest hover:bg-[#cc1f2f] transition-colors shadow-md">
+                        CHECKOUT
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
             </div>

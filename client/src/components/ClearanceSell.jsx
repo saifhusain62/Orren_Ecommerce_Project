@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiHeart, FiEye, FiStar, FiShoppingBag } from 'react-icons/fi'
 import card1img from '../assets/card1.png'
 import card2img from '../assets/card2.png'
 import card3img from '../assets/card3.png'
 import card4img from '../assets/card4.png'
+import QuickViewModal from './QuickViewModal'
+import { useCart } from '../context/CartContext'
+import { useEffect } from 'react'
 
 const ClearanceSell = () => {
+  const { addToCart } = useCart();
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  
+  // Dynamic Timer
+  const initialSeconds = 160 * 24 * 3600 + 7 * 3600 + 22 * 60 + 40;
+  const [timeLeft, setTimeLeft] = useState(initialSeconds);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (totalSeconds) => {
+    const days = Math.floor(totalSeconds / (3600 * 24));
+    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    return [
+      { value: days.toString(), label: 'Days' }, 
+      { value: hours.toString().padStart(2, '0'), label: 'Hrs' },
+      { value: minutes.toString().padStart(2, '0'), label: 'Mins' },
+      { value: seconds.toString().padStart(2, '0'), label: 'Secs' },
+    ];
+  };
+
+  const timerData = formatTime(timeLeft);
+
   const cards = [
     {
       id: 1,
@@ -37,7 +70,7 @@ const ClearanceSell = () => {
           <h2 className="text-[32px] text-[#1a202c] mb-4">
             <span className="font-black">LAST CHANCE</span> CLEARANCE SELL
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-black text-[18px] leading-relaxed">
             Discover fresh looks and modern outfits that define your unique style now. Perfect for
             any occasion, from casual outings to special events.
           </p>
@@ -45,12 +78,7 @@ const ClearanceSell = () => {
 
         {/* Timer */}
         <div className="flex gap-2">
-          {[
-            { value: '160', label: 'Days' },
-            { value: '07', label: 'Hrs' },
-            { value: '22', label: 'Mins' },
-            { value: '40', label: 'Secs' },
-          ].map((time, idx) => (
+          {timerData.map((time, idx) => (
             <div key={idx} className="flex flex-col">
               <div className="bg-[#2d2d2d] text-white text-xl font-bold w-12 h-10 flex items-center justify-center rounded-t-md">
                 {time.value}
@@ -87,7 +115,7 @@ const ClearanceSell = () => {
                               group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 
                               transition-all duration-400 ease-out">
                 <div className="bg-white p-3 rounded-tl-[24px] relative">
-                  
+
                   {/* Left Inverted Curve */}
                   <svg width="24" height="24" viewBox="0 0 24 24" className="absolute bottom-0 -left-[24px] text-white fill-current">
                     <path d="M 24 0 V 24 H 0 A 24 24 0 0 0 24 0 Z" />
@@ -98,7 +126,10 @@ const ClearanceSell = () => {
                     <path d="M 24 0 V 24 H 0 A 24 24 0 0 0 24 0 Z" />
                   </svg>
 
-                  <button className="relative z-10 w-14 h-14 bg-white border border-gray-200 rounded-[16px] flex items-center justify-center text-[#2d2d2d] hover:bg-gray-50 hover:shadow-md transition-all">
+                  <button
+                    onClick={() => setSelectedProduct(card)}
+                    className="relative z-10 w-14 h-14 bg-white border border-gray-200 rounded-[16px] flex items-center justify-center text-[#2d2d2d] hover:bg-gray-50 hover:shadow-md transition-all"
+                  >
                     <FiEye size={24} />
                   </button>
                 </div>
@@ -143,7 +174,13 @@ const ClearanceSell = () => {
 
               {/* Add to Cart Hover Button */}
               <div className="h-0 overflow-hidden opacity-0 mt-0 group-hover:h-12 group-hover:mt-3 group-hover:opacity-100 transition-all duration-400 ease-out">
-                <button className="w-full h-full bg-[#cc1f2f] text-white rounded-lg text-xs font-bold tracking-wider flex items-center justify-center gap-2 hover:bg-black transition-colors shadow-md">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart(card);
+                  }}
+                  className="w-full h-full bg-[#cc1f2f] text-white rounded-lg text-xs font-bold tracking-wider flex items-center justify-center gap-2 hover:bg-black transition-colors shadow-md"
+                >
                   <FiShoppingBag size={14} />
                   ADD TO CART
                 </button>
@@ -161,6 +198,11 @@ const ClearanceSell = () => {
         </button>
       </div>
 
+      {/* Quick View Modal */}
+      <QuickViewModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </section>
   )
 }
