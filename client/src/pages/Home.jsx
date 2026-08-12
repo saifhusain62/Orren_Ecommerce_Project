@@ -9,6 +9,7 @@ import ClearanceSell from '../components/ClearanceSell'
 import ItemsOfWeek from '../components/ItemsOfWeek'
 import CollectionBanner from '../components/CollectionBanner'
 import CustomerReviews from '../components/CustomerReviews'
+import Newsletter from '../components/Newsletter'
 
 const Home = ({ category }) => {
   return (
@@ -23,6 +24,7 @@ const Home = ({ category }) => {
       <ItemsOfWeek />
       <CollectionBanner />
       <CustomerReviews />
+      <Newsletter />
     </main>
   )
 }
