@@ -5,6 +5,7 @@ import NewArrivals from '../components/NewArrivals'
 import MarqueeBanner from '../components/MarqueeBanner'
 import Categories from '../components/Categories'
 import SaleBanner from '../components/SaleBanner'
+import ClearanceSell from '../components/ClearanceSell'
 
 const Home = ({ category }) => {
   return (
@@ -15,6 +16,7 @@ const Home = ({ category }) => {
       <MarqueeBanner />
       <Categories />
       <SaleBanner />
+      <ClearanceSell />
     </main>
   )
 }
