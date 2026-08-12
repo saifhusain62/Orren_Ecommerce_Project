@@ -39,7 +39,7 @@ const ItemsOfWeek = () => {
   }
 
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
+    <section className="w-full max-w-[1450px] mx-auto px-6 py-20 bg-white">
       {/* Header Section */}
       <motion.div
         variants={fadeUpVariant}
@@ -51,7 +51,7 @@ const ItemsOfWeek = () => {
         <h2 className="text-[32px] text-[#1a202c] mb-4">
           <span className="font-black">ITEMS</span> OF THE WEEK
         </h2>
-        <p className="text-gray-600 max-w-2xl text-[15px] leading-relaxed">
+        <p className="text-black max-w-2xl text-[18px] leading-relaxed">
           Discover fresh looks and most selling items of this week that define your unique style
           now. Perfect for any occasion, from casual outings to special events.
         </p>
@@ -63,7 +63,7 @@ const ItemsOfWeek = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-w-[1200px] mx-auto bg-white border border-gray-200 rounded-[24px] shadow-sm flex flex-col lg:flex-row overflow-hidden"
+        className="w-full mx-auto bg-white border border-gray-200 rounded-[24px] shadow-sm flex flex-col lg:flex-row overflow-hidden"
       >
 
         {/* Column 1: Flatlay & Thumbnails */}
@@ -124,12 +124,12 @@ const ItemsOfWeek = () => {
           </p>
 
           {/* Ratings & Stock */}
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
+          <div className="flex items-center gap-3 mb-6 flex-nowrap whitespace-nowrap">
             <div className="flex text-[#f59e0b]">
               {[...Array(5)].map((_, i) => <FiStar key={i} size={12} className="fill-current" />)}
             </div>
             <span className="text-gray-400 text-[10px] border-r border-gray-200 pr-3">562</span>
-            <span className="text-gray-400 text-[10px] uppercase tracking-wider">SKU: DK-408463</span>
+            <span className="text-gray-400 text-[10px] uppercase tracking-wider shrink-0">SKU: DK-408463</span>
             <span className="bg-[#22c55e] text-white text-[9px] font-bold px-2 py-0.5 rounded tracking-wider ml-auto">
               8 IN STOCK
             </span>

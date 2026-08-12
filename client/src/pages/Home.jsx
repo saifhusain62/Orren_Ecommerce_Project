@@ -7,6 +7,7 @@ import Categories from '../components/Categories'
 import SaleBanner from '../components/SaleBanner'
 import ClearanceSell from '../components/ClearanceSell'
 import ItemsOfWeek from '../components/ItemsOfWeek'
+import CollectionBanner from '../components/CollectionBanner'
 
 const Home = ({ category }) => {
   return (
@@ -19,6 +20,7 @@ const Home = ({ category }) => {
       <SaleBanner />
       <ClearanceSell />
       <ItemsOfWeek />
+      <CollectionBanner />
     </main>
   )
 }
