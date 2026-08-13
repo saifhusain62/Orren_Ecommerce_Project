@@ -30,7 +30,7 @@ const ClearanceSell = () => {
   const searchQuery = searchParams.get('search')?.toLowerCase() || ''
 
   // Dynamic Timer
-  const initialSeconds = 160 * 24 * 3600 + 7 * 3600 + 22 * 60 + 40
+  const initialSeconds = 60 * 24 * 3600 + 7 * 3600 + 22 * 60 + 40
   const [timeLeft, setTimeLeft] = useState(initialSeconds)
 
   useEffect(() => {

@@ -16,40 +16,7 @@ const SaleBanner = () => {
       {/* Mobile Layout - stacked */}
       <div className="flex flex-col md:hidden">
 
-        {/* Mobile: 2 images side by side on top */}
-        <div className="flex flex-row w-full">
-          <motion.div
-            initial={{ x: -60, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="w-1/2"
-          >
-            <img
-              src={sale1}
-              alt="Sale Fashion Left"
-              className="w-full h-full object-cover object-top"
-              style={{ display: 'block' }}
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 60, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="w-1/2"
-          >
-            <img
-              src={sale2}
-              alt="Sale Fashion Right"
-              className="w-full h-full object-cover object-center"
-              style={{ display: 'block' }}
-            />
-          </motion.div>
-        </div>
-
-        {/* Mobile: Text content below images */}
+        {/* Mobile: Text content (images hidden) */}
         <motion.div
           initial={{ y: 40, opacity: 0, scale: 0.95 }}
           whileInView={{ y: 0, opacity: 1, scale: 1 }}
