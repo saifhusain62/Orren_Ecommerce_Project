@@ -6,6 +6,20 @@ import hero2img from '../assets/hero2.png'
 import hero3img from '../assets/hero3.png'
 import hero4img from '../assets/hero4.png'
 
+// heroman img 
+
+import heromanimg1 from '../assets/heroman1.png'
+import heromanimg2 from '../assets/heroman2.png'
+import heromanimg3 from '../assets/heroman3.png'
+import heromanimg4 from '../assets/heroman4.png'
+
+// hero baby img 
+
+import herobabyimg1 from '../assets/herobabyimg1.png'
+import herobabyimg2 from '../assets/herobabyimg2.png'
+import herobabyimg3 from '../assets/herobabyimg3.png'
+import herobabyimg4 from '../assets/herobabyimg4.png'
+
 const categoryData = {
   Women: [
     {
@@ -30,8 +44,8 @@ const categoryData = {
   Men: [
     {
       id: 1,
-      leftImage: hero1img,
-      rightImage: hero2img,
+      leftImage: heromanimg1,
+      rightImage: heromanimg2,
       smallText: "Men's Classics",
       bigText: "SHARP & BOLD",
       discount: "60%",
@@ -39,8 +53,8 @@ const categoryData = {
     },
     {
       id: 2,
-      leftImage: hero3img,
-      rightImage: hero4img,
+      leftImage: heromanimg3,
+      rightImage: heromanimg4,
       smallText: "Casual Wear",
       bigText: "STREET STYLE",
       discount: "40%",
@@ -50,8 +64,8 @@ const categoryData = {
   Kids: [
     {
       id: 1,
-      leftImage: hero1img,
-      rightImage: hero2img,
+      leftImage: herobabyimg1,
+      rightImage: herobabyimg4,
       smallText: "Kids Collection",
       bigText: "PLAYFUL & FUN",
       discount: "70%",
@@ -59,8 +73,8 @@ const categoryData = {
     },
     {
       id: 2,
-      leftImage: hero3img,
-      rightImage: hero4img,
+      leftImage: herobabyimg2,
+      rightImage: herobabyimg3,
       smallText: "Back to School",
       bigText: "SMART LOOKS",
       discount: "30%",

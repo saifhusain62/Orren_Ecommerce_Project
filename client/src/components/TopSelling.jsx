@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FiHeart, FiEye, FiStar, FiShoppingBag } from 'react-icons/fi'
 import card1img from '../assets/top1.png'
 import card2img from '../assets/top2.png'
@@ -7,6 +7,19 @@ import card3img from '../assets/top3.png'
 import card4img from '../assets/top4.png'
 import QuickViewModal from './QuickViewModal'
 import { useCart } from '../context/CartContext'
+
+// This month image
+import thismonthimage1 from '../assets/thismonth1.png'
+import thismonthimage2 from '../assets/thismonth2.png'
+import thismonthimage3 from '../assets/hero3.png'
+import thismonthimage4 from '../assets/hero4.png'
+
+// This year image 
+import thisyearimage1 from '../assets/year1.png'
+import thisyearimage2 from '../assets/year2.png'
+import thisyearimage3 from '../assets/year3.png'
+import thisyearimage4 from '../assets/year4.png'
+
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -28,12 +41,41 @@ const TopSelling = () => {
 
   const filters = ['This Week', 'This Month', 'This Year', 'All Time']
 
-  const cards = [
-    { id: 1, bgClass: 'bg-[#daf5ff]', image: card1img },
-    { id: 2, bgClass: 'bg-[#eef2ff]', image: card2img },
-    { id: 3, bgClass: 'bg-[#fef3c7]', image: card3img },
-    { id: 4, bgClass: 'bg-[#ecfccb]', image: card4img },
-  ]
+  const getCards = () => {
+    switch(activeFilter) {
+      case 'This Month':
+        return [
+          { id: 1, bgClass: 'bg-[#daf5ff]', image: thismonthimage1 },
+          { id: 2, bgClass: 'bg-[#eef2ff]', image: thismonthimage2 },
+          { id: 3, bgClass: 'bg-[#fef3c7]', image: thismonthimage3 },
+          { id: 4, bgClass: 'bg-[#ecfccb]', image: thismonthimage4 },
+        ];
+      case 'This Year':
+        return [
+          { id: 1, bgClass: 'bg-[#daf5ff]', image: thisyearimage1 },
+          { id: 2, bgClass: 'bg-[#eef2ff]', image: thisyearimage2 },
+          { id: 3, bgClass: 'bg-[#fef3c7]', image: thisyearimage3 },
+          { id: 4, bgClass: 'bg-[#ecfccb]', image: thisyearimage4 },
+        ];
+      case 'All Time':
+        return [
+          { id: 1, bgClass: 'bg-[#daf5ff]', image: card1img },
+          { id: 2, bgClass: 'bg-[#eef2ff]', image: thismonthimage1 },
+          { id: 3, bgClass: 'bg-[#fef3c7]', image: thisyearimage1 },
+          { id: 4, bgClass: 'bg-[#ecfccb]', image: thismonthimage2 },
+        ];
+      case 'This Week':
+      default:
+        return [
+          { id: 1, bgClass: 'bg-[#daf5ff]', image: card1img },
+          { id: 2, bgClass: 'bg-[#eef2ff]', image: card2img },
+          { id: 3, bgClass: 'bg-[#fef3c7]', image: card3img },
+          { id: 4, bgClass: 'bg-[#ecfccb]', image: card4img },
+        ];
+    }
+  };
+
+  const cards = getCards();
 
   return (
     <section className="w-full max-w-[1440px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-6 py-12 sm:py-16 lg:py-20 bg-white">
@@ -62,8 +104,8 @@ const TopSelling = () => {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               className={`px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-full transition-all duration-300 whitespace-nowrap ${activeFilter === filter
-                  ? 'bg-white text-black shadow-sm'
-                  : 'hover:text-black hover:bg-gray-100/50'
+                ? 'bg-white text-black shadow-sm'
+                : 'hover:text-black hover:bg-gray-100/50'
                 }`}
             >
               {filter}
@@ -73,13 +115,16 @@ const TopSelling = () => {
       </motion.div>
 
       {/* Grid */}
-      <motion.div
-        variants={containerVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-        className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6"
-      >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeFilter}
+          variants={containerVariant}
+          initial="hidden"
+          whileInView="visible"
+          exit={{ opacity: 0, y: 20, transition: { duration: 0.2 } }}
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6"
+        >
         {cards.map((card) => (
           <motion.div
             variants={fadeUpVariant}
@@ -220,7 +265,8 @@ const TopSelling = () => {
             </div>
           </motion.div>
         ))}
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
 
       {/* Load More Button */}
       <div className="flex justify-center mt-10 sm:mt-14 lg:mt-16">
