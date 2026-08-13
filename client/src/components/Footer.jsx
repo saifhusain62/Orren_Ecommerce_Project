@@ -80,7 +80,7 @@ const Footer = () => {
             </div>
             <div>
               <p className="text-gray-400 text-xs mb-3">Payment Method</p>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {/* Fake Payment Icons */}
                 <div className="bg-[#1a1f2e] text-white text-[10px] font-bold px-2 py-1 rounded">VISA</div>
                 <div className="bg-[#e11d48] text-white text-[10px] font-bold px-2 py-1 rounded">Master</div>

@@ -54,12 +54,12 @@ const TopSelling = () => {
         </p>
 
         {/* Filter Pills */}
-        <div className="flex bg-gray-200 rounded-full p-1 text-[13px] font-semibold text-gray-500 shadow-inner">
+        <div className="flex flex-wrap justify-center bg-gray-200 rounded-[1.5rem] md:rounded-full p-1 text-[11px] md:text-[13px] font-semibold text-gray-500 shadow-inner">
           {filters.map(filter => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2 rounded-full transition-all duration-300 ${activeFilter === filter
+              className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full transition-all duration-300 ${activeFilter === filter
                   ? 'bg-white text-black shadow-sm'
                   : 'hover:text-black hover:bg-gray-100/50'
                 }`}
