@@ -2,56 +2,76 @@ import React from 'react'
 import { FiFacebook, FiTwitter, FiInstagram, FiYoutube } from 'react-icons/fi'
 import { FaTelegramPlane } from 'react-icons/fa'
 
+const BrandLogos = () => (
+  <>
+    <div className="flex flex-col items-center shrink-0">
+      <span className="text-white font-bold tracking-widest uppercase text-sm">LE BARREL</span>
+      <span className="text-gray-500 text-[10px]">Original Blend</span>
+    </div>
+
+    <div className="hidden md:block w-px h-10 bg-gray-600/50 shrink-0"></div>
+
+    <div className="text-white font-serif italic font-bold text-xl tracking-wider shrink-0">
+      Something
+    </div>
+
+    <div className="hidden md:block w-px h-10 bg-gray-600/50 shrink-0"></div>
+
+    <div className="border border-gray-500 px-4 py-1.5 text-white text-xs font-semibold tracking-[0.2em] uppercase shrink-0">
+      Costa Brava
+    </div>
+
+    <div className="hidden md:block w-px h-10 bg-gray-600/50 shrink-0"></div>
+
+    <div className="flex flex-col items-center shrink-0">
+      <span className="text-white font-bold tracking-widest text-sm uppercase">é OCEANIC</span>
+      <span className="text-gray-500 text-[9px] tracking-widest">& Co</span>
+    </div>
+
+    <div className="hidden md:block w-px h-10 bg-gray-600/50 shrink-0"></div>
+
+    <div className="border border-gray-500 rounded-full px-6 py-1.5 text-white text-[10px] font-semibold tracking-widest uppercase flex items-center gap-2 shrink-0">
+      <span className="w-2 h-2 rounded-full border border-gray-400"></span> FOUNTAIN <span className="w-2 h-2 rounded-full border border-gray-400"></span>
+    </div>
+
+    <div className="hidden md:block w-px h-10 bg-gray-600/50 shrink-0"></div>
+
+    <div className="text-white font-bold tracking-widest text-xs flex items-center gap-2 uppercase shrink-0">
+      BLACK BIRDS
+    </div>
+
+    <div className="hidden md:block w-px h-10 bg-gray-600/50 shrink-0"></div>
+
+    <div className="border border-gray-500 px-4 py-1.5 text-white text-sm font-bold tracking-widest flex flex-col items-center shrink-0">
+      <span>HUGO</span>
+      <span className="text-[8px] text-gray-500 font-normal tracking-widest">STUDIO</span>
+    </div>
+  </>
+);
+
 const Footer = () => {
   return (
     <footer className="w-full bg-[#2a2f38] text-gray-300">
 
       {/* Top Brand Logos Section */}
-      <div className="border-b border-gray-600/50">
-        <div className="max-w-[1750px] mx-auto flex flex-wrap items-center justify-between py-6 px-6 lg:px-12 gap-8 overflow-hidden">
-          {/* Faking the logos with text/styled divs to match layout closely */}
-          <div className="flex flex-col items-center">
-            <span className="text-white font-bold tracking-widest uppercase text-sm">LE BARREL</span>
-            <span className="text-gray-500 text-[10px]">Original Blend</span>
+      <div className="border-b border-gray-600/50 overflow-hidden">
+        <div className="max-w-[1750px] mx-auto py-6 lg:px-12">
+          
+          {/* PC Layout: Normal flex wrap layout */}
+          <div className="hidden md:flex flex-wrap items-center justify-between gap-8 px-6 w-full">
+            <BrandLogos />
           </div>
 
-          <div className="hidden md:block w-px h-10 bg-gray-600/50"></div>
-
-          <div className="text-white font-serif italic font-bold text-xl tracking-wider">
-            Something
+          {/* Mobile Layout: Seamless one-line marquee */}
+          <div className="flex md:hidden w-max animate-marquee">
+            <div className="flex items-center gap-8 pr-8 pl-4">
+              <BrandLogos />
+            </div>
+            <div className="flex items-center gap-8 pr-8">
+              <BrandLogos />
+            </div>
           </div>
-
-          <div className="hidden md:block w-px h-10 bg-gray-600/50"></div>
-
-          <div className="border border-gray-500 px-4 py-1.5 text-white text-xs font-semibold tracking-[0.2em] uppercase">
-            Costa Brava
-          </div>
-
-          <div className="hidden md:block w-px h-10 bg-gray-600/50"></div>
-
-          <div className="flex flex-col items-center">
-            <span className="text-white font-bold tracking-widest text-sm uppercase">é OCEANIC</span>
-            <span className="text-gray-500 text-[9px] tracking-widest">& Co</span>
-          </div>
-
-          <div className="hidden md:block w-px h-10 bg-gray-600/50"></div>
-
-          <div className="border border-gray-500 rounded-full px-6 py-1.5 text-white text-[10px] font-semibold tracking-widest uppercase flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full border border-gray-400"></span> FOUNTAIN <span className="w-2 h-2 rounded-full border border-gray-400"></span>
-          </div>
-
-          <div className="hidden md:block w-px h-10 bg-gray-600/50"></div>
-
-          <div className="text-white font-bold tracking-widest text-xs flex items-center gap-2 uppercase">
-            BLACK BIRDS
-          </div>
-
-          <div className="hidden md:block w-px h-10 bg-gray-600/50"></div>
-
-          <div className="border border-gray-500 px-4 py-1.5 text-white text-sm font-bold tracking-widest flex flex-col items-center">
-            <span>HUGO</span>
-            <span className="text-[8px] text-gray-500 font-normal tracking-widest">STUDIO</span>
-          </div>
+          
         </div>
       </div>
 
