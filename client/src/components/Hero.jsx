@@ -151,7 +151,7 @@ const Hero = ({ category }) => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col items-center bg-white/50 backdrop-blur-md p-10 rounded-[3rem]"
+              className="flex flex-col items-center justify-center bg-white/50 backdrop-blur-md p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] w-[90vw] max-w-[360px] min-h-[420px] md:w-auto md:max-w-none md:min-h-0"
             >
               <div className="font-dancing italic text-[#C8102E] text-[16px] md:text-[20px] mb-2 leading-none">
                 {slides[current].smallText}
