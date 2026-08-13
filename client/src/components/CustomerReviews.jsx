@@ -14,7 +14,7 @@ const fadeUpVariant = {
 
 const CustomerReviews = () => {
   return (
-    <section className="w-full relative bg-white py-24 overflow-hidden">
+    <section id="blog" className="w-full relative bg-white py-24 overflow-hidden">
       {/* Background Vertical Lines */}
       <div className="absolute inset-0 max-w-[1450px] mx-auto grid grid-cols-4 md:grid-cols-5 pointer-events-none">
         {[...Array(6)].map((_, i) => (

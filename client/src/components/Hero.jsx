@@ -83,7 +83,7 @@ const Hero = ({ category }) => {
   const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
 
   return (
-    <div className="relative w-full h-[75vh] min-h-[600px] max-h-[800px] overflow-hidden bg-white group flex">
+    <div id="home" className="relative w-full h-[75vh] min-h-[600px] max-h-[800px] overflow-hidden bg-white group flex">
       {/* Vertical grid lines */}
       <div className="absolute inset-0 flex justify-between px-[10%] pointer-events-none z-0">
         <div className="w-[1px] h-full bg-gray-100"></div>
@@ -155,7 +155,7 @@ const Hero = ({ category }) => {
                   {slides[current].price}
                 </span>
               </div>
-              <button className="cursor-pointer mt-10 border-[3px] border-black px-10 py-3.5 text-sm font-bold tracking-[0.2em] hover:bg-black hover:text-white transition-all duration-300 rounded-xl hover:shadow-xl">
+              <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer mt-10 border-[3px] border-black px-10 py-3.5 text-sm font-bold tracking-[0.2em] hover:bg-black hover:text-white transition-all duration-300 rounded-xl hover:shadow-xl">
                 SHOP NOW
               </button>
             </motion.div>

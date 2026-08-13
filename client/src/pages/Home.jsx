@@ -10,6 +10,7 @@ import ItemsOfWeek from '../components/ItemsOfWeek'
 import CollectionBanner from '../components/CollectionBanner'
 import CustomerReviews from '../components/CustomerReviews'
 import Newsletter from '../components/Newsletter'
+import TopSelling from '../components/TopSelling'
 
 const Home = ({ category }) => {
   return (
@@ -23,6 +24,7 @@ const Home = ({ category }) => {
       <ClearanceSell />
       <ItemsOfWeek />
       <CollectionBanner />
+      <TopSelling />
       <CustomerReviews />
       <Newsletter />
     </main>

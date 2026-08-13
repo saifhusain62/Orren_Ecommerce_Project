@@ -35,7 +35,7 @@ const Newsletter = () => {
               <h3 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-6">
                 End Of Season<br />Save 50% Off
               </h3>
-              <button className="bg-[#4b5563]/80 hover:bg-[#4b5563] backdrop-blur-sm text-white text-xs font-semibold tracking-wider uppercase px-6 py-2.5 rounded transition-colors">
+              <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#4b5563]/80 hover:bg-[#4b5563] backdrop-blur-sm text-white text-xs font-semibold tracking-wider uppercase px-6 py-2.5 rounded transition-colors cursor-pointer">
                 Shop Now
               </button>
             </div>

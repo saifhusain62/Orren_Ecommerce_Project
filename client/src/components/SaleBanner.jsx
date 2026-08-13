@@ -53,7 +53,7 @@ const SaleBanner = () => {
         </p>
 
         {/* CTA Button */}
-        <button className="bg-[#cc1f2f] text-white px-12 py-3.5 rounded text-sm font-bold tracking-wider hover:bg-black transition-colors shadow-lg">
+        <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#cc1f2f] text-white px-12 py-3.5 rounded text-sm font-bold tracking-wider hover:bg-black transition-colors shadow-lg cursor-pointer">
           Shop Now
         </button>
       </motion.div>

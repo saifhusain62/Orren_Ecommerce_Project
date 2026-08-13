@@ -123,7 +123,7 @@ const NewArrivals = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 tracking-tight">
                   {card.title}
                 </h3>
-                <button className="bg-[#cc1f2f] text-white px-8 py-2.5 rounded-md text-xs font-bold tracking-wider hover:bg-black transition-colors shadow-lg ">
+                <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#cc1f2f] text-white px-8 py-2.5 rounded-md text-xs font-bold tracking-wider hover:bg-black transition-colors shadow-lg cursor-pointer">
                   SHOP NOW
                 </button>
               </div>

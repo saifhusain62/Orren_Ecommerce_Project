@@ -5,6 +5,8 @@ import card1img from '../assets/card1.png'
 import card2img from '../assets/card2.png'
 import card3img from '../assets/card3.png'
 import card4img from '../assets/card4.png'
+import QuickViewModal from './QuickViewModal'
+import { useCart } from '../context/CartContext'
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -18,105 +20,53 @@ const containerVariant = {
     transition: { staggerChildren: 0.15 }
   }
 }
-import QuickViewModal from './QuickViewModal'
-import { useCart } from '../context/CartContext'
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 
-const ClearanceSell = () => {
-  const { addToCart, toggleWishlist, wishlistItems } = useCart();
+const TopSelling = () => {
+  const { addToCart, toggleWishlist, wishlistItems, formatPrice } = useCart();
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('search')?.toLowerCase() || '';
-  
-  // Dynamic Timer
-  const initialSeconds = 160 * 24 * 3600 + 7 * 3600 + 22 * 60 + 40;
-  const [timeLeft, setTimeLeft] = useState(initialSeconds);
+  const [activeFilter, setActiveFilter] = useState('This Week');
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTime = (totalSeconds) => {
-    const days = Math.floor(totalSeconds / (3600 * 24));
-    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    
-    return [
-      { value: days.toString(), label: 'Days' }, 
-      { value: hours.toString().padStart(2, '0'), label: 'Hrs' },
-      { value: minutes.toString().padStart(2, '0'), label: 'Mins' },
-      { value: seconds.toString().padStart(2, '0'), label: 'Secs' },
-    ];
-  };
-
-  const timerData = formatTime(timeLeft);
+  const filters = ['This Week', 'This Month', 'This Year', 'All Time'];
 
   const cards = [
-    {
-      id: 1,
-      bgClass: 'bg-[#daf5ff]',
-      image: card1img,
-    },
-    {
-      id: 2,
-      bgClass: 'bg-[#eef2ff]',
-      image: card2img,
-    },
-    {
-      id: 3,
-      bgClass: 'bg-[#fef3c7]',
-      image: card3img,
-    },
-    {
-      id: 4,
-      bgClass: 'bg-[#ecfccb]',
-      image: card4img,
-    },
-  ]
-
-  const filteredCards = cards.filter(card => {
-    if (!searchQuery) return true;
-    const title = 'Classic Slim-Fit Denim Jacket'.toLowerCase(); // Hardcoded title for demo
-    return title.includes(searchQuery) || 'fashion'.includes(searchQuery);
-  });
+    { id: 1, bgClass: 'bg-[#daf5ff]', image: card1img },
+    { id: 2, bgClass: 'bg-[#eef2ff]', image: card2img },
+    { id: 3, bgClass: 'bg-[#fef3c7]', image: card3img },
+    { id: 4, bgClass: 'bg-[#ecfccb]', image: card4img },
+  ];
 
   return (
-    <section id="products" className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
+    <section className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
       {/* Header */}
       <motion.div 
         variants={fadeUpVariant}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8"
+        className="flex flex-col items-center text-center mb-10"
       >
-        <div className="max-w-2xl">
-          <h2 className="text-[32px] text-[#1a202c] mb-4">
-            <span className="font-black">LAST CHANCE</span> CLEARANCE SELL
-          </h2>
-          <p className="text-black text-[18px] leading-relaxed">
-            Discover fresh looks and modern outfits that define your unique style now. Perfect for
-            any occasion, from casual outings to special events.
-          </p>
-        </div>
+        <h2 className="text-[32px] text-[#1a202c] mb-4">
+          <span className="font-black">TOP SELLING</span> ITEMS
+        </h2>
+        <p className="text-gray-600 max-w-2xl text-[15px] leading-relaxed mb-10">
+          Discover fresh looks and modern outfits that define your unique style now. Perfect for
+          any occasion, from casual outings to special events.
+        </p>
 
-        {/* Timer */}
-        <div className="flex gap-2">
-          {timerData.map((time, idx) => (
-            <div key={idx} className="flex flex-col">
-              <div className="bg-[#2d2d2d] text-white text-xl font-bold w-12 h-10 flex items-center justify-center rounded-t-md">
-                {time.value}
-              </div>
-              <div className="bg-[#1f1f1f] text-gray-300 text-[10px] uppercase w-12 h-6 flex items-center justify-center rounded-b-md">
-                {time.label}
-              </div>
-            </div>
+        {/* Filter Pills */}
+        <div className="flex bg-gray-200 rounded-full p-1 text-[13px] font-semibold text-gray-500 shadow-inner">
+          {filters.map(filter => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                activeFilter === filter 
+                  ? 'bg-white text-black shadow-sm' 
+                  : 'hover:text-black hover:bg-gray-100/50'
+              }`}
+            >
+              {filter}
+            </button>
           ))}
         </div>
       </motion.div>
@@ -129,9 +79,8 @@ const ClearanceSell = () => {
         viewport={{ once: true, margin: "-100px" }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        {filteredCards.length > 0 ? filteredCards.map((card) => (
+        {cards.map((card) => (
           <motion.div variants={fadeUpVariant} key={card.id} className="group relative flex flex-col bg-white">
-
             {/* Image Box */}
             <div className={`relative h-[380px] group-hover:h-[320px] transition-all duration-400 ease-out rounded-[32px] overflow-hidden ${card.bgClass} cursor-pointer`}>
               <img
@@ -146,31 +95,25 @@ const ClearanceSell = () => {
                 e.stopPropagation();
                 toggleWishlist(card);
               }}
-              className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm transition-colors z-10"
+              className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm transition-colors z-10 cursor-pointer"
             >
               <FiHeart size={14} className={wishlistItems.some(item => item.id === card.id) ? 'fill-red-500 text-red-500' : ''} />
             </button>
 
               {/* Eye Icon Hover Cutout Container */}
-              <div className="absolute bottom-0 right-0 z-20 
-                              opacity-0 translate-x-4 translate-y-4 
-                              group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 
-                              transition-all duration-400 ease-out">
+              <div className="absolute bottom-0 right-0 z-20 opacity-0 translate-x-4 translate-y-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-400 ease-out">
                 <div className="bg-white p-3 rounded-tl-[24px] relative">
-
                   {/* Left Inverted Curve */}
                   <svg width="24" height="24" viewBox="0 0 24 24" className="absolute bottom-0 -left-[24px] text-white fill-current">
                     <path d="M 24 0 V 24 H 0 A 24 24 0 0 0 24 0 Z" />
                   </svg>
-
                   {/* Top Inverted Curve */}
                   <svg width="24" height="24" viewBox="0 0 24 24" className="absolute -top-[24px] right-0 text-white fill-current">
                     <path d="M 24 0 V 24 H 0 A 24 24 0 0 0 24 0 Z" />
                   </svg>
-
                   <button
                     onClick={() => setSelectedProduct(card)}
-                    className="relative z-10 w-14 h-14 bg-white border border-gray-200 rounded-[16px] flex items-center justify-center text-[#2d2d2d] hover:bg-gray-50 hover:shadow-md transition-all"
+                    className="relative z-10 w-14 h-14 bg-white border border-gray-200 rounded-[16px] flex items-center justify-center text-[#2d2d2d] hover:bg-gray-50 hover:shadow-md transition-all cursor-pointer"
                   >
                     <FiEye size={24} />
                   </button>
@@ -207,8 +150,8 @@ const ClearanceSell = () => {
 
               {/* Price Row */}
               <div className="flex items-center gap-2 mb-2 transition-all duration-300">
-                <span className="text-gray-400 text-xs line-through">$295.00</span>
-                <span className="text-[#1a202c] font-black text-lg">$179.98</span>
+                <span className="text-gray-400 text-xs line-through">{formatPrice ? formatPrice(295.00) : '$295.00'}</span>
+                <span className="text-[#1a202c] font-black text-lg">{formatPrice ? formatPrice(179.98) : '$179.98'}</span>
                 <span className="bg-[#ef4444] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
                   -30%
                 </span>
@@ -221,7 +164,7 @@ const ClearanceSell = () => {
                     e.stopPropagation();
                     addToCart(card);
                   }}
-                  className="w-full h-full bg-[#cc1f2f] text-white rounded-lg text-xs font-bold tracking-wider flex items-center justify-center gap-2 hover:bg-black transition-colors shadow-md"
+                  className="w-full h-full bg-[#cc1f2f] text-white rounded-lg text-xs font-bold tracking-wider flex items-center justify-center gap-2 hover:bg-black transition-colors shadow-md cursor-pointer"
                 >
                   <FiShoppingBag size={14} />
                   ADD TO CART
@@ -230,17 +173,13 @@ const ClearanceSell = () => {
 
             </div>
           </motion.div>
-        )) : (
-          <div className="col-span-full text-center py-10 text-gray-500">
-            No products found matching "{searchQuery}"
-          </div>
-        )}
+        ))}
       </motion.div>
 
-      {/* View More Button */}
-      <div className="flex justify-center mt-12">
-        <button className="bg-[#cc1f2f] text-white px-10 py-3.5 rounded-lg text-sm font-bold tracking-wider hover:bg-black transition-colors shadow-lg">
-          View More
+      {/* Load More Button */}
+      <div className="flex justify-center mt-16">
+        <button className="bg-[#cc1f2f] text-white px-10 py-3 rounded-lg text-sm font-semibold hover:bg-black transition-colors shadow-md cursor-pointer">
+          Load More
         </button>
       </div>
 
@@ -253,4 +192,4 @@ const ClearanceSell = () => {
   )
 }
 
-export default ClearanceSell
+export default TopSelling

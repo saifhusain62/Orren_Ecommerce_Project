@@ -29,7 +29,7 @@ const containerVariant = {
 
 const Categories = () => {
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
+    <section id="categories" className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
       {/* Header Section */}
       <motion.div 
         variants={fadeUpVariant}

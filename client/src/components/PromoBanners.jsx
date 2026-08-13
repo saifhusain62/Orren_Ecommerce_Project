@@ -38,7 +38,7 @@ const PromoBanners = () => {
             TRENDING<br />HAT SALES
           </h3>
           <p className="text-[#cc1f2f] text-[10px] font-bold tracking-[0.2em] mb-5">STARTING AT $99</p>
-          <button className="border-2 border-black px-6 py-2 text-[10px] font-bold tracking-[0.2em] hover:bg-black hover:text-white transition-colors rounded">
+          <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="border-2 border-black px-6 py-2 text-[10px] font-bold tracking-[0.2em] hover:bg-black hover:text-white transition-colors rounded cursor-pointer">
             BUY NOW!
           </button>
         </div>
@@ -57,7 +57,7 @@ const PromoBanners = () => {
             Top Brands<br />Summer Sunglasses
           </p>
           <p className="text-white text-[10px] font-bold tracking-[0.2em] mb-4">STARTING AT <span className="text-[#cc1f2f]">$199<span className="text-[8px]">.99</span></span></p>
-          <button className="border-2 border-gray-600 text-white px-6 py-2 text-[10px] font-bold tracking-[0.2em] hover:border-white transition-colors rounded">
+          <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="border-2 border-gray-600 text-white px-6 py-2 text-[10px] font-bold tracking-[0.2em] hover:border-white transition-colors rounded cursor-pointer">
             VIEW SALE
           </button>
         </div>
@@ -72,7 +72,7 @@ const PromoBanners = () => {
             <span className="text-[44px] leading-none">50%</span>
             <span className="text-sm tracking-widest ml-1 text-gray-800 font-bold">OFF</span>
           </div>
-          <button className="bg-[#cc1f2f] text-white px-6 py-2.5 text-[10px] font-bold tracking-[0.2em] hover:bg-black transition-colors rounded">
+          <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#cc1f2f] text-white px-6 py-2.5 text-[10px] font-bold tracking-[0.2em] hover:bg-black transition-colors rounded cursor-pointer">
             GET YOURS!
           </button>
         </div>
@@ -95,7 +95,7 @@ const PromoBanners = () => {
           <span className="text-[#c19a5b] text-[9px] font-bold tracking-[0.3em] uppercase mb-3">GOLDENGATE</span>
           <h3 className="text-xl font-black text-[#1a202c] tracking-widest mb-1.5">DEAL PROMOS</h3>
           <p className="text-gray-400 text-[9px] font-bold tracking-[0.2em] mb-5">STARTING AT $99</p>
-          <button className="bg-[#1a1a1a] text-white px-8 py-2.5 text-[10px] font-bold tracking-[0.2em] hover:bg-[#cc1f2f] transition-colors rounded">
+          <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#1a1a1a] text-white px-8 py-2.5 text-[10px] font-bold tracking-[0.2em] hover:bg-[#cc1f2f] transition-colors rounded cursor-pointer">
             SHOP NOW
           </button>
         </div>

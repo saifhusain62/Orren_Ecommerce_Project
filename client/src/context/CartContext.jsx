@@ -24,13 +24,13 @@ export const CartProvider = ({ children }) => {
     setCartItems(prev => {
       const existing = prev.find(item => item.id === product.id);
       if (existing) {
-        return prev.map(item => 
+        return prev.map(item =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
       return [...prev, { ...product, quantity: 1, price: 179.98 }];
     });
-    
+
     setToast({
       message: 'Added to cart successfully!',
       productName: product.title || 'Classic Slim-Fit Denim Jacket'
@@ -67,7 +67,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, wishlistItems, toggleWishlist, removeFromWishlist }}>
       {children}
-      
+
       {/* Global Toast Popup */}
       <div className={`fixed bottom-8 right-8 z-[100] transition-all duration-500 ease-out ${toast ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}>
         {toast && (
@@ -79,7 +79,7 @@ export const CartProvider = ({ children }) => {
               <h4 className="font-bold text-gray-900 text-sm mb-1">{toast.message}</h4>
               <p className="text-gray-500 text-xs">{toast.productName}</p>
             </div>
-            <button 
+            <button
               onClick={() => setToast(null)}
               className="text-gray-400 hover:text-gray-800 transition-colors p-1"
             >
