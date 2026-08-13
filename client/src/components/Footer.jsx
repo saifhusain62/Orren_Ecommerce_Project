@@ -1,6 +1,7 @@
 import React from 'react'
 import { FiFacebook, FiTwitter, FiInstagram, FiYoutube } from 'react-icons/fi'
 import { FaTelegramPlane } from 'react-icons/fa'
+import footerlogo from '../assets/footerlogo.svg'
 
 const BrandLogos = () => (
   <>
@@ -56,7 +57,7 @@ const Footer = () => {
       {/* Top Brand Logos Section */}
       <div className="border-b border-gray-600/50 overflow-hidden">
         <div className="max-w-[1750px] mx-auto py-6 lg:px-12">
-          
+
           {/* PC Layout: Normal flex wrap layout */}
           <div className="hidden md:flex flex-wrap items-center justify-between gap-8 px-6 w-full">
             <BrandLogos />
@@ -71,7 +72,7 @@ const Footer = () => {
               <BrandLogos />
             </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -80,15 +81,9 @@ const Footer = () => {
 
         {/* Brand & Contact */}
         <div className="lg:col-span-2 pr-0 lg:pr-12">
-          {/* Logo */}
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-6 h-6 rounded-full border-[3px] border-white flex items-center justify-center">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-            </div>
-            <h2 className="text-white text-3xl font-black tracking-widest">ORREN</h2>
+          <div className="mb-2 flex items-center">
+            <img src={footerlogo} alt="Orren Logo" className="h-[40px] object-contain" />
           </div>
-          <p className="text-[10px] text-gray-400 tracking-[0.3em] mb-8 uppercase">Fashion & Lifestyle</p>
-
           <p className="text-sm text-gray-400 leading-relaxed mb-8 max-w-md">
             Discover stylish and comfortable fashion pieces designed to elevate your wardrobe. Our collection blends trendy designs with quality fabrics, perfect for any occasion.
           </p>

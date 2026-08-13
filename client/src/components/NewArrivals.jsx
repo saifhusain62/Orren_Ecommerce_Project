@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   FiArrowUpRight,
@@ -40,6 +40,24 @@ const containerVariant = {
 };
 
 const NewArrivals = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % 3);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isMobile]);
+
   const cards = [
     {
       id: 1,
@@ -161,7 +179,7 @@ const NewArrivals = () => {
         {/* =========================
             Cards Area
         ========================== */}
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center overflow-hidden w-full">
           {/* Left Arrow */}
           <button
             type="button"
@@ -217,13 +235,11 @@ const NewArrivals = () => {
               margin: "-100px",
             }}
             className="
-              grid
-              grid-cols-1
+              flex
+              md:grid
               md:grid-cols-2
               lg:grid-cols-3
 
-              gap-5
-              sm:gap-6
               md:gap-6
               lg:gap-6
               xl:gap-8
@@ -234,7 +250,12 @@ const NewArrivals = () => {
               lg:px-10
               xl:px-5
               2xl:px-4
+
+              transition-transform
+              duration-500
+              ease-in-out
             "
+            style={isMobile ? { transform: `translateX(-${currentIndex * 100}%)` } : {}}
           >
             {cards.map((card) => (
               <motion.div
@@ -244,6 +265,9 @@ const NewArrivals = () => {
                   relative
                   group
                   overflow-hidden
+
+                  min-w-full
+                  md:min-w-0
 
                   rounded-[24px]
                   sm:rounded-[28px]
@@ -584,22 +608,23 @@ const NewArrivals = () => {
         <div
           className="
             flex
+            md:hidden
             items-center
             justify-center
             gap-2
 
             mt-8
             sm:mt-10
-            lg:mt-12
           "
         >
-          <div className="w-7 sm:w-8 h-2 bg-gray-600 rounded-full" />
-
-          <div className="w-2 h-2 bg-gray-300 rounded-full" />
-
-          <div className="w-2 h-2 bg-gray-300 rounded-full" />
-
-          <div className="w-2 h-2 bg-gray-300 rounded-full" />
+          {cards.map((_, idx) => (
+            <div
+              key={idx}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === currentIndex ? "w-7 sm:w-8 bg-gray-600" : "w-2 bg-gray-300"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
