@@ -69,9 +69,9 @@ const Navbar = ({ category, setCategory }) => {
           </div>
         </div>
 
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-start lg:justify-center">
           <Link to="/" className="flex flex-col items-center group">
-            <img src={logo} alt="Orren Logo" className="h-[40px] object-contain group-hover:scale-105 transition-transform" />
+            <img src={logo} alt="Orren Logo" className="h-[28px] lg:h-[40px] object-contain group-hover:scale-105 transition-transform" />
           </Link>
         </div>
 
