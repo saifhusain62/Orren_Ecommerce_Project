@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiHeart, FiEye, FiStar, FiShoppingBag } from 'react-icons/fi'
-import card1img from '../assets/card1.png'
-import card2img from '../assets/card2.png'
-import card3img from '../assets/card3.png'
-import card4img from '../assets/card4.png'
+import card1img from '../assets/top1.png'
+import card2img from '../assets/top2.png'
+import card3img from '../assets/top3.png'
+import card4img from '../assets/top4.png'
 import QuickViewModal from './QuickViewModal'
 import { useCart } from '../context/CartContext'
 
@@ -38,7 +38,7 @@ const TopSelling = () => {
   return (
     <section className="w-full max-w-[1440px] mx-auto px-6 py-20 bg-white">
       {/* Header */}
-      <motion.div 
+      <motion.div
         variants={fadeUpVariant}
         initial="hidden"
         whileInView="visible"
@@ -59,11 +59,10 @@ const TopSelling = () => {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                activeFilter === filter 
-                  ? 'bg-white text-black shadow-sm' 
+              className={`px-6 py-2 rounded-full transition-all duration-300 ${activeFilter === filter
+                  ? 'bg-white text-black shadow-sm'
                   : 'hover:text-black hover:bg-gray-100/50'
-              }`}
+                }`}
             >
               {filter}
             </button>
@@ -72,7 +71,7 @@ const TopSelling = () => {
       </motion.div>
 
       {/* Grid */}
-      <motion.div 
+      <motion.div
         variants={containerVariant}
         initial="hidden"
         whileInView="visible"
@@ -89,16 +88,16 @@ const TopSelling = () => {
                 className="absolute bottom-0 left-0 w-full h-[95%] object-contain object-bottom transition-transform duration-700 group-hover:scale-105 z-0"
               />
 
-            {/* Heart Icon */}
-            <button 
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleWishlist(card);
-              }}
-              className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm transition-colors z-10 cursor-pointer"
-            >
-              <FiHeart size={14} className={wishlistItems.some(item => item.id === card.id) ? 'fill-red-500 text-red-500' : ''} />
-            </button>
+              {/* Heart Icon */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleWishlist(card);
+                }}
+                className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm transition-colors z-10 cursor-pointer"
+              >
+                <FiHeart size={14} className={wishlistItems.some(item => item.id === card.id) ? 'fill-red-500 text-red-500' : ''} />
+              </button>
 
               {/* Eye Icon Hover Cutout Container */}
               <div className="absolute bottom-0 right-0 z-20 opacity-0 translate-x-4 translate-y-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-400 ease-out">
