@@ -21,21 +21,25 @@ const Newsletter = () => {
         {/* Left Side: Image with Overlay */}
         <div className="w-full md:w-1/3 relative min-h-[400px] md:min-h-[550px] p-2">
           {/* Inner rounded wrapper for the image */}
-          <div className="w-full h-full relative rounded-[20px] overflow-hidden">
+          <div className="w-full h-full relative rounded-[20px] overflow-hidden group">
             <img
               src={newsimg}
               alt="End of Season"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
+            
+            {/* Hover Black Overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+
             {/* Dark gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end items-center text-center pb-12">
-              <span className="text-white/90 text-[10px] font-bold tracking-widest uppercase mb-3">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 flex flex-col justify-center items-center text-center z-10 transition-colors duration-500">
+              <span className="text-white/90 text-[10px] font-bold tracking-widest uppercase mb-3 drop-shadow-md">
                 Limited Time Only
               </span>
-              <h3 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-6">
+              <h3 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-6 drop-shadow-md">
                 End Of Season<br />Save 50% Off
               </h3>
-              <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#4b5563]/80 hover:bg-[#4b5563] backdrop-blur-sm text-white text-xs font-semibold tracking-wider uppercase px-6 py-2.5 rounded transition-colors cursor-pointer">
+              <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#4b5563]/80 group-hover:bg-[#cc1f2f] backdrop-blur-sm text-white text-xs font-semibold tracking-wider uppercase px-8 py-3 rounded transition-all duration-300 cursor-pointer shadow-lg">
                 Shop Now
               </button>
             </div>

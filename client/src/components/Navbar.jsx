@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({ category, setCategory }) => {
-  const { cartItems, removeFromCart, wishlistItems, currency, setCurrency, formatPrice } = useCart();
+  const { cartItems, removeFromCart, wishlistItems } = useCart();
   const [activePopup, setActivePopup] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   const navRef = useRef(null)
@@ -60,8 +60,8 @@ const Navbar = ({ category, setCategory }) => {
   return (
     <header className="w-full flex flex-col bg-white">
       {/* Top Bar */}
-      <div className="flex justify-between items-center py-2 px-8 border-b border-gray-100 text-sm font-medium text-gray-600">
-        <div className="flex gap-6">
+      <div className="flex justify-between items-center py-2 px-4 md:px-8 border-b border-gray-100 text-sm font-medium text-gray-600">
+        <div className="hidden lg:flex gap-6">
           <Link to="/" className="hover:text-black transition-colors">Store Location</Link>
           <Link to="/" className="hover:text-black transition-colors">Track Your Order</Link>
           <div className="flex items-center gap-1 cursor-pointer hover:text-black transition-colors">
@@ -75,15 +75,9 @@ const Navbar = ({ category, setCategory }) => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="relative group">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-black font-semibold transition-colors">
-              {currency === 'USD' ? '$ USD' : '৳ BDT'} <FiChevronDown />
-            </div>
-            <div className="absolute top-full left-0 mt-2 bg-white border border-gray-100 shadow-lg rounded hidden group-hover:flex flex-col z-50 overflow-hidden">
-              <button onClick={() => setCurrency('USD')} className="px-4 py-2 text-left hover:bg-gray-50 text-sm">USD</button>
-              <button onClick={() => setCurrency('BDT')} className="px-4 py-2 text-left hover:bg-gray-50 text-sm">BDT</button>
-            </div>
+        <div className="flex items-center gap-3 md:gap-6">
+          <div className="flex items-center gap-1 cursor-pointer hover:text-black font-semibold transition-colors">
+            $ USD <FiChevronDown />
           </div>
           <div className="flex items-center gap-5 text-lg text-gray-800" ref={navRef}>
             <div className="relative">
@@ -92,9 +86,9 @@ const Navbar = ({ category, setCategory }) => {
                 <div className="absolute top-8 right-0 w-64 bg-white border border-gray-200 shadow-xl p-4 z-50 rounded" onClick={e => e.stopPropagation()}>
                   <h3 className="font-bold text-sm mb-2 text-black">Search</h3>
                   <form onSubmit={handleSearch}>
-                    <input 
-                      type="text" 
-                      placeholder="Search products..." 
+                    <input
+                      type="text"
+                      placeholder="Search products..."
                       className="w-full border p-2 text-sm text-black"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -153,12 +147,12 @@ const Navbar = ({ category, setCategory }) => {
                               <img src={item.image} alt={item.title || 'Product'} className="w-10 h-10 object-cover rounded" />
                               <div className="flex flex-col">
                                 <span className="text-xs font-bold line-clamp-1">{item.title || 'Classic Slim-Fit Denim Jacket'}</span>
-                                <span className="text-gray-500 text-[10px]">{item.quantity} × {formatPrice ? formatPrice(item.price) : `$${item.price}`}</span>
+                                <span className="text-gray-500 text-[10px]">{item.quantity} × ${item.price.toFixed(2)}</span>
                               </div>
                             </div>
                             <div className="flex items-center gap-3">
-                              <span className="font-bold text-sm">{formatPrice ? formatPrice(item.price * item.quantity) : `$${(item.price * item.quantity).toFixed(2)}`}</span>
-                              <FiTrash2 
+                              <span className="font-bold text-sm">${(item.price * item.quantity).toFixed(2)}</span>
+                              <FiTrash2
                                 className="text-gray-300 hover:text-red-500 cursor-pointer transition-colors"
                                 onClick={() => removeFromCart(item.id)}
                               />
@@ -169,7 +163,7 @@ const Navbar = ({ category, setCategory }) => {
                       <div className="flex justify-between font-bold text-[#cc1f2f] border-t pt-2 mt-1">
                         <span>Total</span>
                         <span>
-                          {formatPrice ? formatPrice(cartItems.reduce((total, item) => total + (item.price * item.quantity), 0)) : `$${cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`}
+                          ${cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}
                         </span>
                       </div>
                       <button className="cursor-pointer mt-2 w-full bg-black text-white py-3 rounded-lg font-bold tracking-widest hover:bg-[#cc1f2f] transition-colors shadow-md">
@@ -190,8 +184,8 @@ const Navbar = ({ category, setCategory }) => {
       </div>
 
       {/* Main Nav */}
-      <div className="flex justify-between items-center py-4 px-8 border-b border-gray-100 font-bold text-[13px] tracking-widest">
-        <nav className="flex gap-8 text-gray-500">
+      <div className="flex flex-col md:flex-row justify-between items-center py-4 px-4 md:px-8 border-b border-gray-100 font-bold text-[11px] md:text-[13px] tracking-widest gap-4 md:gap-0">
+        <nav className="flex flex-wrap justify-center gap-4 md:gap-8 text-gray-500">
           <a href="#home" onClick={(e) => handleSmoothScroll(e, 'home')} className="text-[#cc1f2f] cursor-pointer hover:text-black transition-colors">HOME</a>
           <a href="#categories" onClick={(e) => handleSmoothScroll(e, 'categories')} className="cursor-pointer hover:text-black transition-colors">CATEGORIES</a>
           <a href="#products" onClick={(e) => handleSmoothScroll(e, 'products')} className="cursor-pointer hover:text-black transition-colors">PRODUCTS</a>

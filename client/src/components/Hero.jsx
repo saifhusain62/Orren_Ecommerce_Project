@@ -113,7 +113,7 @@ const Hero = ({ category }) => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.7 }}
               src={slides[current].leftImage}
-              className="absolute left-[10%] bottom-0 h-[85%] object-cover w-auto z-0"
+              className="absolute -left-[20%] md:left-0 lg:left-[10%] bottom-0 h-[60%] md:h-[75%] lg:h-[85%] object-cover w-auto z-0 opacity-40 lg:opacity-100"
               alt="Model Left"
             />
             {/* Right Image */}
@@ -122,7 +122,7 @@ const Hero = ({ category }) => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.7 }}
               src={slides[current].rightImage}
-              className="absolute right-[10%] bottom-0 h-[85%] object-cover w-auto z-0"
+              className="absolute -right-[20%] md:right-0 lg:right-[10%] bottom-0 h-[60%] md:h-[75%] lg:h-[85%] object-cover w-auto z-0 opacity-40 lg:opacity-100"
               alt="Model Right"
             />
           </motion.div>
@@ -139,15 +139,15 @@ const Hero = ({ category }) => {
               transition={{ duration: 0.5 }}
               className="flex flex-col items-center bg-white/50 backdrop-blur-md p-10 rounded-[3rem]"
             >
-              <div className="font-dancing italic text-[#C8102E] text-[20px] mb-2 leading-none">
+              <div className="font-dancing italic text-[#C8102E] text-[16px] md:text-[20px] mb-2 leading-none">
                 {slides[current].smallText}
               </div>
-              <h1 className="text-[54px] font-bold text-[#1a202c] tracking-tight mb-2 leading-none">
+              <h1 className="text-[32px] md:text-[54px] font-bold text-[#1a202c] tracking-tight mb-2 leading-none">
                 {slides[current].bigText}
               </h1>
               <div className="flex items-baseline justify-center font-black text-[#0f172a] mt-2">
-                <span className="text-[140px] leading-none tracking-tighter">{slides[current].discount}</span>
-                <span className="text-[40px] ml-4 tracking-widest font-bold text-gray-800">OFF</span>
+                <span className="text-[80px] md:text-[140px] leading-none tracking-tighter">{slides[current].discount}</span>
+                <span className="text-[24px] md:text-[40px] ml-2 md:ml-4 tracking-widest font-bold text-gray-800">OFF</span>
               </div>
               <div className="flex items-center mt-6 gap-3 font-semibold text-gray-500 tracking-[0.2em] text-[13px]">
                 STARTING AT
